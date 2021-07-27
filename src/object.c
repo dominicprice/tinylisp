@@ -37,7 +37,8 @@ LispObject lisp_object_new_(LispObjectType type)
 }
 
 LispObject lisp_object_create_reference(LispObject other) {
-	VALIDATE_OBJECT(other);
+	if (other == NULL)
+		return NULL;
 	++other->refcount;
 	return other;
 }
@@ -507,5 +508,5 @@ LispBuiltin lisp_builtin_get(LispObject builtin)
 void lisp_builtin_print(LispObject builtin)
 {
 	VALIDATE_OBJECT(builtin);
-	printf("<builtin at %p>", lisp_builtin_get(builtin));
+	printf("<builtin at 0x%p>", lisp_builtin_get(builtin));
 }
